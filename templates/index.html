@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Buscador de Himnos</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=dark_mode" />
+
+<style>
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+body {
+    margin: 0;
+    background-color: #f5f5f5;
+    font-family: 'Inter', sans-serif;
+    color: #222;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.link-acerca {
+    font-size: 14px;
+    color: #555;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.link-acerca:hover {
+    background-color: #eaeaea;
+    color: #1f3a5f;
+}
+
+.dark-btn {
+    margin-right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #1f3a5f;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.dark-btn:hover {
+    background-color: #eaeaea;
+    color: #1f3a5f;
+}
+
+.material-symbols-outlined {
+    vertical-align: middle;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    gap: 10px;
+    margin: 0 auto 30px auto;
+    max-width: 700px;
+    width: 100%;
+    justify-content: center;
+}
+
+input, select {
+    font-size: 16px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+button {
+    padding: 12px 18px;
+    border: none;
+    background-color: #1f3a5f;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    min-height: 44px;
+}
+
+button:hover {
+    background-color: #162c47;
+}
+
+.himno {
+    background: white;
+    padding: 18px;
+    margin-bottom: 18px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+
+.himno h3 {
+    margin: 0;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.himnario {
+    font-size: 13px;
+    color: #666;
+}
+
+.score {
+    font-size: 12px;
+    color: #999;
+}
+
+.relevancia {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+.relevancia.Alta {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.relevancia.Media {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.letra {
+    white-space: pre-wrap;
+    margin-top: 10px;
+}
+
+.letra-preview {
+    margin-top: 10px;
+}
+
+.toggle-btn {
+    margin-top: 10px;
+    background: none;
+    border: none;
+    color: #1f3a5f;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.toggle-btn:hover {
+    background-color: #eaeaea;
+    color: #1f3a5f;
+}
+
+.no-resultados {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    font-size: 16px;
+}
+
+.no-resultados p {
+    margin-bottom: 10px;
+}
+
+#cargarMasBtn {
+    margin: 20px auto;
+    display: block;
+    background-color: #1f3a5f;
+}
+
+/* 🌙 MODO OSCURO */
+body.dark {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark .himno {
+    background: #1e1e1e;
+    border: 1px solid #333;
+}
+
+body.dark input,
+body.dark select {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border: 1px solid #444;
+}
+
+body.dark .himnario,
+body.dark .score {
+    color: #aaa;
+}
+
+body.dark .letra-preview {
+    color: #ccc;
+}
+
+body.dark .relevancia.Alta {
+    background-color: #1e4620;
+    color: #8fd19e;
+}
+
+body.dark .dark-btn:hover,
+body.dark .toggle-btn:hover {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+}
+
+body.dark .toggle-btn {
+    color: #e0e0e0;
+}
+
+body.dark .relevancia.Media {
+    background-color: #5c4a1e;
+    color: #ffe08a;
+}
+
+body.dark .link-acerca {
+    color: #ccc;
+}
+
+body.dark .link-acerca:hover {
+    background-color: #2a2a2a;
+}
+
+body.dark .no-resultados {
+    color: #aaa;
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 600px) {
+
+    .container {
+        padding: 20px 10px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    input, select, button {
+        width: 100%;
+    }
+
+    .himno {
+        padding: 14px;
+    }
+
+    .himno h3 {
+        font-size: 16px;
+    }
+
+    .letra {
+        font-size: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="top-bar">
+    <button onclick="toggleDarkMode()" class="dark-btn" aria-label="Cambiar modo oscuro">
+        <span class="material-symbols-outlined">dark_mode</span>
+    </button>
+    <a href="/acerca" class="link-acerca">Acerca de</a>
+</div>
+
+<h1>Buscador de Himnos</h1>
+
+<form method="POST">
+    <input type="text" name="query" placeholder="Ej: gracia en la cruz" value="{{ query }}" required>
+
+    <select name="himnario">
+        <option value="Todos">Todos</option>
+        {% for h in himnarios %}
+            <option value="{{ h }}" {% if h == seleccionado %}selected{% endif %}>
+                {{ h }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Buscar</button>
+</form>
+
+<div id="lista-himnos">
+
+{% for score, nivel, himno in resultados %}
+<div class="himno-item" style="display:none;">
+<div class="himno">
+
+<h3>
+{% if himno.numero %}
+{{ himno.numero }}.
+{% endif %}
+{{ himno.titulo }}
+</h3>
+
+<div class="himnario">{{ himno.himnario }}</div>
+
+<div class="relevancia {{ nivel }}">{{ nivel }}</div>
+
+<div class="score">Score: {{ "%.2f"|format(score) }}</div>
+
+<div class="letra-preview">
+    {{ himno.letra_original[:100] }}...
+</div>
+
+{% if not himno.es_restringido %}
+
+<div class="letra-completa" style="display:none;">
+    <div class="letra">{{ himno.letra_original }}</div>
+</div>
+
+<button class="toggle-btn" onclick="toggleTexto(this)">Ver más</button>
+
+{% else %}
+
+<div style="font-size:12px; color:#888; margin-top:5px;">
+    (Letra completa no disponible)
+</div>
+
+{% endif %}
+
+</div>
+</div>
+{% endfor %}
+
+{% if not resultados %}
+<div class="no-resultados">
+    <p>No se encontraron himnos que coincidan con tu búsqueda.</p>
+    <p>Prueba con palabras clave diferentes o selecciona "Todos" los himnarios.</p>
+</div>
+{% endif %}
+
+{% if resultados %}
+<button id="cargarMasBtn" onclick="cargarMas()">Cargar más</button>
+{% endif %}
+
+</div>
+
+<script>
+// Aplicar modo nocturno inmediatamente
+if (localStorage.getItem("modo") === "dark") {
+    document.body.classList.add("dark");
+}
+
+function toggleTexto(btn) {
+    const contenedor = btn.parentElement;
+
+    const preview = contenedor.querySelector(".letra-preview");
+    const completa = contenedor.querySelector(".letra-completa");
+
+    if (completa.style.display === "none") {
+        completa.style.display = "block";
+        preview.style.display = "none";
+        btn.innerText = "Ver menos";
+    } else {
+        completa.style.display = "none";
+        preview.style.display = "block";
+        btn.innerText = "Ver más";
+    }
+}
+
+let visibles = 0;
+const cantidad = 15;
+
+function cargarMas() {
+    const items = document.querySelectorAll(".himno-item");
+
+    for (let i = visibles; i < visibles + cantidad; i++) {
+        if (items[i]) {
+            items[i].style.display = "block";
+        }
+    }
+
+    visibles += cantidad;
+
+    if (visibles >= items.length) {
+        document.getElementById("cargarMasBtn").style.display = "none";
+    }
+}
+
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+        localStorage.setItem("modo", "dark");
+    } else {
+        localStorage.setItem("modo", "light");
+    }
+}
+
+window.onload = function() {
+    cargarMas();
+};
+</script>
+
+</body>
+</html>
