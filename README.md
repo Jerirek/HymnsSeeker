@@ -1,3 +1,14 @@
+---
+title: HymnsSeeker
+emoji: "🎵"
+colorFrom: "#1f3a5f"
+colorTo: "#f5f5f5"
+sdk: docker
+sdk_version: ""
+app_file: app.py
+pinned: false
+---
+
 # HymnsSeeker
 
 Una herramienta web para buscar himnos utilizando inteligencia artificial y búsqueda semántica. Desarrollada para ayudar en la selección de cantos en el culto, permitiendo encontrar himnos que compartan un mismo tema.
