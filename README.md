@@ -1,10 +1,10 @@
 ---
 title: HymnsSeeker
 emoji: "🎵"
-colorFrom: "#1f3a5f"
-colorTo: "#f5f5f5"
+colorFrom: blue
+colorTo: indigo
 sdk: docker
-sdk_version: ""
+sdk_version: latest
 app_file: app.py
 pinned: false
 ---
