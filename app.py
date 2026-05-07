@@ -1,11 +1,18 @@
 from flask import Flask, render_template, request
 import json
 import numpy as np
+import os
 from sentence_transformers import SentenceTransformer
 
 app = Flask(__name__)
 
-model = SentenceTransformer('paraphrase-multilingual-mpnet-base-v2')
+model = None
+
+def get_model():
+    global model
+    if model is None:
+        model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+    return model
 
 # Cargar himnos
 with open("himnos_embeddings.json", "r", encoding="utf-8") as f:
@@ -50,7 +57,7 @@ def es_himnario_restringido(nombre):
 
 
 def buscar(query, himnario_filtro=None):
-    query_embedding = model.encode(query)
+    query_embedding = get_model().encode(query)
     resultados = []
 
     for himno in himnos:
