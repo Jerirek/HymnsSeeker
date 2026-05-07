@@ -18,9 +18,9 @@ Una herramienta web para buscar himnos utilizando inteligencia artificial y bús
 - **IA**: Sentence Transformers (modelo `paraphrase-multilingual-MiniLM-L12-v2`)
 - **Embeddings**: Numpy para cálculos de similitud coseno
 - **Frontend**: HTML, CSS, JavaScript puro
-- **Despliegue**: Gunicorn, compatible con Heroku y Render
+- **Despliegue**: Docker, compatible con Hugging Face Spaces
 
-## Instalación
+## Instalación local
 
 1. Clona el repositorio:
    ```bash
@@ -40,7 +40,42 @@ Una herramienta web para buscar himnos utilizando inteligencia artificial y bús
    python app.py
    ```
 
-5. Abre tu navegador en `http://localhost:5000`
+5. Abre tu navegador en `http://localhost:7860`
+
+## Despliegue en Hugging Face Spaces (RECOMENDADO)
+
+### Ventajas:
+- ✅ Hosting **completamente gratuito**
+- ✅ Muy estable (mejor que Render gratuito)
+- ✅ Soporte nativo para Docker
+- ✅ Sin límites de memoria
+- ✅ URL pública y permanente
+
+### Pasos:
+
+1. Crea una cuenta en [Hugging Face](https://huggingface.co) (gratis)
+
+2. Ve a [Hugging Face Spaces](https://huggingface.co/spaces) y haz clic en "Create new Space"
+
+3. Configura el espacio:
+   - **Space name**: himnsseeker (o el nombre que prefieras)
+   - **License**: Elige la que prefieras
+   - **Space SDK**: **Docker**
+   - **Space hardware**: CPU (gratuito)
+
+4. Sube los archivos al repositorio de git:
+   ```bash
+   git clone https://huggingface.co/spaces/[tu-usuario]/himnsseeker
+   cd himnsseeker
+   # Copia los archivos: app.py, requirements.txt, himnos_embeddings.json, Dockerfile, templates/
+   git add .
+   git commit -m "Primer despliegue"
+   git push
+   ```
+
+5. HF Spaces construirá automáticamente el Docker y desplegará tu aplicación.
+
+6. Tu app estará disponible en: `https://huggingface.co/spaces/[tu-usuario]/himnsseeker`
 
 ## Uso
 
